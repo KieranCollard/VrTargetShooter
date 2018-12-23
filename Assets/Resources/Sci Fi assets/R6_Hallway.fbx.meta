@@ -72,7 +72,32 @@ ModelImporter:
     4300018: WalkBridge
     4300020: SideFences
     4300022: Base
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BaseCorridor
+    second: {fileID: 2100000, guid: 604831ad0840bc349b191bd129262af2, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 0ba72d29ee41ba9489563e2fcc9f6672, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pipes
+    second: {instanceID: 0}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideFence
+    second: {instanceID: 0}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Walkplate
+    second: {instanceID: 0}
   materials:
     importMaterials: 1
     materialName: 0
