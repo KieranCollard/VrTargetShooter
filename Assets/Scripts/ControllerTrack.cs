@@ -28,7 +28,6 @@ public class ControllerTrack : MonoBehaviour {
         //updte the controller
         OVRInput.Update();
 
-        
         this.transform.position = this.transform.parent.TransformPoint(InputTracking.GetLocalPosition(XRNode.RightHand));
         this.transform.rotation = this.transform.parent.rotation * InputTracking.GetLocalRotation(XRNode.RightHand);
     }
