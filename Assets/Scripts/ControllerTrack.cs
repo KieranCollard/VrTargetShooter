@@ -25,11 +25,20 @@ public class ControllerTrack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //updte the controller
-        OVRInput.Update();
+        
+        if(Application.platform ==  RuntimePlatform.WindowsEditor) //assume dev computer
+        {
+            this.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+        }
+        else // no direct  check for oculus
+        {
+            //updte the controller
+            OVRInput.Update();
 
-        this.transform.position = this.transform.parent.TransformPoint(InputTracking.GetLocalPosition(XRNode.RightHand));
-        this.transform.rotation = this.transform.parent.rotation * InputTracking.GetLocalRotation(XRNode.RightHand);
+            this.transform.position = this.transform.parent.TransformPoint(InputTracking.GetLocalPosition(XRNode.RightHand));
+            this.transform.rotation = this.transform.parent.rotation * InputTracking.GetLocalRotation(XRNode.RightHand);
+        }
+
     }
 
     private void FixedUpdate()
