@@ -40,7 +40,6 @@ public class TargetFlipping : MonoBehaviour {
     {
         if (isTransitioningToStand == false && isTransitioningToLay == false)
         {
-            Debug.Log("standing up");
             isTransitioningToStand = true;
             isTransitioningToLay = false;
             isLayingDown = false;
@@ -55,7 +54,6 @@ public class TargetFlipping : MonoBehaviour {
     {
         if (isTransitioningToLay == false && isTransitioningToStand == false)
         {
-            Debug.Log("Laying down");
             isTransitioningToStand = false;
             isTransitioningToLay = true;
             isStanding = false;

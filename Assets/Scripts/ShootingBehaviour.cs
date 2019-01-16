@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class TriggerBehaviour : MonoBehaviour {
+public class ShootingBehaviour : MonoBehaviour {
+
+    public GameObject bulletHoleDecal;
+
     Animation fireAnimation;
     LayerMask targetsMask;
 
@@ -23,6 +26,11 @@ public class TriggerBehaviour : MonoBehaviour {
         {
             Debug.Log("The glock prefab must have the bullet counter script atttached");
         }
+
+        if(bulletHoleDecal == null)
+        {
+            Debug.Log("The shooting behaviour needs a prefab for it's bullet hole decal which was not assigned");
+        }
     }
 
     // Update is called once per frame
@@ -37,9 +45,11 @@ public class TriggerBehaviour : MonoBehaviour {
                 bulletCounter.SubtractBullet();
                 RaycastHit hitInfo;
 
-                if(Physics.Raycast(this.transform.position, this.transform.forward, out hitInfo, Mathf.Infinity, targetsMask))
+                if(Physics.Raycast(this.transform.position, this.transform.forward, out hitInfo, Mathf.Infinity))
                 {
                     hitInfo.transform.GetComponent<TargetFlipping>().OnShot();
+                    //make our forward vector follow the normal of our hit location
+                    Instantiate(bulletHoleDecal, hitInfo.point, Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal), hitInfo.transform);
                 }
 
 

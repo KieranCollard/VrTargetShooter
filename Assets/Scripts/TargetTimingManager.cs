@@ -41,7 +41,6 @@ public class TargetTimingManager : MonoBehaviour {
             int index = Random.Range(0, targets.Count);
             if(targets[index].isLayingDown)
             {
-                Debug.Log("used the random index");
                 targets[index].Standup();
             }
             else
@@ -53,7 +52,6 @@ public class TargetTimingManager : MonoBehaviour {
                 {
                     if (targets[index].isLayingDown)
                     {
-                        Debug.Log("searched the list");
                         targets[index].Standup();
                         break;
                     }

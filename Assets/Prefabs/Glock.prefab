@@ -52,7 +52,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4080869008326234}
   - component: {fileID: 114739458865375626}
-  - component: {fileID: 114141030624736620}
+  - component: {fileID: 114439699958442056}
+  - component: {fileID: 114261925781380136}
   m_Layer: 0
   m_Name: Glock
   m_TagString: Untagged
@@ -404,7 +405,7 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114141030624736620
+--- !u!114 &114261925781380136
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -412,9 +413,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306180810908892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdebd8431175e234d9803e849ff9d37b, type: 3}
+  m_Script: {fileID: 11500000, guid: 86f38d4c7fbb0d1429e1050b81428f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletHoleDecal: {fileID: 1413271863013878, guid: 275e1a2f98cfa974eb1508cf3a0599f2,
+    type: 2}
+--- !u!114 &114439699958442056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306180810908892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7de18984f483294cb9b7463124becd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingBulletCount: 17
+  gameStateManager: {fileID: 0}
 --- !u!114 &114739458865375626
 MonoBehaviour:
   m_ObjectHideFlags: 1

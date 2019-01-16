@@ -18,7 +18,7 @@ public class BulletCounter : MonoBehaviour {
 
         if(gameStateManager == null)
         {
-            Debug.Log("The game state manager is null. The game state manager needs to be assigned an object with the GameStateManager script");
+            Debug.Log("The game state manager is null. The game state manager needs to be assigned an object with the GameStateManager script\nThis object must be instantiated in scene\n" + this.transform.name);
         }
 	}
 	
