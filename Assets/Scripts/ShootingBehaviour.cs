@@ -45,11 +45,22 @@ public class ShootingBehaviour : MonoBehaviour {
                 bulletCounter.SubtractBullet();
                 RaycastHit hitInfo;
 
-                if(Physics.Raycast(this.transform.position, this.transform.forward, out hitInfo, Mathf.Infinity))
+                if(Physics.Raycast(this.transform.position, this.transform.forward, out hitInfo, Mathf.Infinity, LayerMask.GetMask("BulletInteractable")))
                 {
-                    hitInfo.transform.GetComponent<TargetFlipping>().OnShot();
-                    //make our forward vector follow the normal of our hit location
-                    Instantiate(bulletHoleDecal, hitInfo.point, Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal), hitInfo.transform);
+                    TargetFlipping targetScript = hitInfo.transform.GetComponent<TargetFlipping>();
+                    if (targetScript != null)
+                    {
+                        targetScript.OnShot();
+                        //make our forward vector follow the normal of our hit location
+                    }
+                    GameObject decal = Instantiate(bulletHoleDecal, hitInfo.point, Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal));
+                    Vector3 decalScale = decal.transform.localScale;
+                    decal.transform.parent = hitInfo.transform;
+                    //did we scale larger than desired when attaching to parent
+                    if (decal.transform.localScale.x > +decal.transform.localScale.x * 4)
+                    {
+                        decal.transform.localScale = decalScale;
+                    }
                 }
 
 
