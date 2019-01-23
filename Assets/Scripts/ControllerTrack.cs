@@ -6,7 +6,8 @@ using UnityEngine.XR;
 //keep attached prefab in sync with the attached controller
 //assumes that the controller is a child of the main OVR rig
 public class ControllerTrack : MonoBehaviour {
-
+    //object to use when converting from local headset space to worldspace
+    public Transform referenceObject;
     OVRInput.Controller controller;
     // Use this for initialization
     void Start () {
@@ -19,7 +20,10 @@ public class ControllerTrack : MonoBehaviour {
         {
             Debug.Log("The controller was not detected. Check controller is connected and restart");
         }
-		
+		if(referenceObject == null)
+        {
+            Debug.LogError("The Controller tracker script did not have an object set to use for word space conversions");
+        }
 	}
 	
 	// Update is called once per frame
@@ -35,8 +39,8 @@ public class ControllerTrack : MonoBehaviour {
             //updte the controller
             OVRInput.Update();
 
-            this.transform.position = this.transform.parent.TransformPoint(InputTracking.GetLocalPosition(XRNode.RightHand));
-            this.transform.rotation = this.transform.parent.rotation * InputTracking.GetLocalRotation(XRNode.RightHand);
+            this.transform.position = referenceObject.TransformPoint(InputTracking.GetLocalPosition(XRNode.RightHand));
+            this.transform.rotation = referenceObject.rotation * InputTracking.GetLocalRotation(XRNode.RightHand);
         }
 
     }

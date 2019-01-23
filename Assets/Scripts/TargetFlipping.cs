@@ -65,8 +65,11 @@ public class TargetFlipping : MonoBehaviour {
 
     public void OnShot()
     {
-        LayDown();
-        ///TODO score system
+        if (isLayingDown == false && isTransitioningToLay == false && isTransitioningToStand == false)
+        {
+            LayDown();
+            ///TODO score system
+        }
     }
 
     private void Update()
@@ -78,9 +81,6 @@ public class TargetFlipping : MonoBehaviour {
         }
         else if(isTransitioningToLay)
         {
-
-            ///TODO doesn't really account for if the target is shot during this transition period
-            ///probably fine if the stand and lay transition is fast
             this.transform.rotation = Quaternion.Lerp(standingQuaternion, layingQuaternion, percentage);
         }
 
