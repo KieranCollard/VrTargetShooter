@@ -33,6 +33,22 @@ public class ControllerTrack : MonoBehaviour {
         if(Application.platform ==  RuntimePlatform.WindowsEditor) //assume dev computer
         {
             this.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                this.transform.Rotate(new Vector3(1, 0, 0), 15);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                this.transform.Rotate(new Vector3(1, 0, 0), -15);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                this.transform.Rotate(new Vector3(0, 1, 0), 15);
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                this.transform.Rotate(new Vector3(0, 1, 0), -15);
+            }
         }
         else // no direct  check for oculus
         {

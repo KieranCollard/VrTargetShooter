@@ -92,7 +92,10 @@ public class ShootingBehaviour : MonoBehaviour
         //work out a percentage away from center of the target and scale the score based on this.
         float maximumDistance = hitCollider.size.x /2;
         Debug.Log("max distance " + maximumDistance);
-        float distance = (hitPoint - hitCollider.center).magnitude;
+        Debug.Log("point of hit " + hitPoint);
+        Vector3 centerAsWorld = hitCollider.transform.TransformPoint(hitCollider.center);
+        Debug.Log("center of collider " + centerAsWorld);
+        float distance = (hitPoint - centerAsWorld).magnitude;
         Debug.Log("distance " + distance);
         //too far away means a missed shot
         if(distance < maximumDistance)
@@ -102,6 +105,10 @@ public class ShootingBehaviour : MonoBehaviour
             uint score = System.Convert.ToUInt32(Mathf.CeilToInt(scoreManagerScript.maximumScore * ((maximumDistance - distance) / maximumDistance)));
             Debug.Log("Score value is " + score);
             scoreManagerScript.AddScore(score);
+        }
+        else
+        {
+            Debug.LogWarning("Distance of shot was too great");
         }
     }
 }
