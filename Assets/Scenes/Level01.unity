@@ -1103,9 +1103,19 @@ Prefab:
       propertyPath: scoreUI
       value: 
       objectReference: {fileID: 429149326}
+    - target: {fileID: 114145404269095152, guid: 8f59bc3b2d50e8f419a09ad8464c00a7,
+        type: 2}
+      propertyPath: scoreKey
+      value: HighScore
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f59bc3b2d50e8f419a09ad8464c00a7, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1059279926 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4898040923119294, guid: 8f59bc3b2d50e8f419a09ad8464c00a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1059279925}
 --- !u!1001 &1089899926
 Prefab:
   m_ObjectHideFlags: 0
@@ -1165,6 +1175,11 @@ Prefab:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1057456865}
+    - target: {fileID: 114644589406568964, guid: c18989a25a1b2454ba80ff859047a668,
+        type: 2}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1059279926}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c18989a25a1b2454ba80ff859047a668, type: 2}
   m_IsPrefabParent: 0

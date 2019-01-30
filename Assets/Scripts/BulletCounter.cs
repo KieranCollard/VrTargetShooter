@@ -13,7 +13,8 @@ public class BulletCounter : MonoBehaviour {
     BulletCountUI uiDisplay;
 
     public Transform gameStateManager;
-
+    public Transform scoreManager;
+    ScoreManager scoreManagerScript;
 	// Use this for initialization
 	void Start () {
         currentBulletCount = startingBulletCount;
@@ -35,6 +36,18 @@ public class BulletCounter : MonoBehaviour {
             }
             uiDisplay.UpdateCountDisplay(currentBulletCount);
         }
+        if(scoreManager == null)
+        {
+            Debug.LogError("The ammo counter object does not have areference to the score manager. This is required to allow saving of highscore");
+        }
+        else
+        {
+            scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+            if(scoreManagerScript == null)
+            {
+                Debug.LogError("The score manager script was not attached to the score manager object assigned to bullet  counter object");
+            }
+        }
     }
 	
 	public void SubtractBullet()
@@ -45,7 +58,8 @@ public class BulletCounter : MonoBehaviour {
             uiDisplay.UpdateCountDisplay(currentBulletCount);
             if (currentBulletCount <= 0)
             {
-                gameStateManager.GetComponent<GameStateManager>().Reload();
+                scoreManagerScript.SaveHighScore();
+                gameStateManager.GetComponent<GameStateManager>().LoadEndGameScene();
             }
         }
     }

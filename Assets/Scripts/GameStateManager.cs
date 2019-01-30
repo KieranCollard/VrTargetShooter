@@ -7,11 +7,25 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : MonoBehaviour
 {
 
+    public string MainMenuName = "MainMenu";
+    public string GameName = "Level01";
+    public string EndGameScene = "EndOfGame";
     public void Reload()
     {
         Debug.Log("Reloading current level");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    ///TODO load other scenesetc.
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(MainMenuName);
+    }
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(GameName);
+    }
+    public void LoadEndGameScene()
+    {
+        SceneManager.LoadScene(EndGameScene);
+    }
 }

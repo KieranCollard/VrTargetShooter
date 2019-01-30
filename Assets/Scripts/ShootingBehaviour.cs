@@ -72,7 +72,8 @@ public class ShootingBehaviour : MonoBehaviour
                             CalculateAndAddScore(hitInfo.point, boxCollider);
                         }
                     }
-                    GameObject decal = Instantiate(bulletHoleDecal, hitInfo.point, Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal));
+                    //put us slightly offset from object to avoid Z fighting
+                    GameObject decal = Instantiate(bulletHoleDecal, new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z - 0.1f), Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal));
                     Vector3 decalScale = decal.transform.localScale;
                     decal.transform.parent = hitInfo.transform;
                     //did we scale larger than desired when attaching to parent
@@ -91,24 +92,13 @@ public class ShootingBehaviour : MonoBehaviour
     {
         //work out a percentage away from center of the target and scale the score based on this.
         float maximumDistance = hitCollider.size.x /2;
-        Debug.Log("max distance " + maximumDistance);
-        Debug.Log("point of hit " + hitPoint);
         Vector3 centerAsWorld = hitCollider.transform.TransformPoint(hitCollider.center);
-        Debug.Log("center of collider " + centerAsWorld);
         float distance = (hitPoint - centerAsWorld).magnitude;
-        Debug.Log("distance " + distance);
         //too far away means a missed shot
         if(distance < maximumDistance)
         {
-            Debug.Log("expected percentage " + ((maximumDistance -distance) / maximumDistance));
-            Debug.Log(" score value expected " + scoreManagerScript.maximumScore * ((maximumDistance -distance) / maximumDistance));
             uint score = System.Convert.ToUInt32(Mathf.CeilToInt(scoreManagerScript.maximumScore * ((maximumDistance - distance) / maximumDistance)));
-            Debug.Log("Score value is " + score);
             scoreManagerScript.AddScore(score);
-        }
-        else
-        {
-            Debug.LogWarning("Distance of shot was too great");
         }
     }
 }
