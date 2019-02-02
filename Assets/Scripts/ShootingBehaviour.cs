@@ -14,6 +14,7 @@ public class ShootingBehaviour : MonoBehaviour
 
     BulletCounter bulletCounter;
     ScoreManager scoreManagerScript;
+    AudioSource source;
     // Use this for initialization
     void Start()
     {
@@ -41,11 +42,21 @@ public class ShootingBehaviour : MonoBehaviour
         {
             scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         }
+        source = this.GetComponent<AudioSource>();
+        if(source == null)
+        {
+            Debug.LogError("The shooting behaviour script did not find an audio source in attached components");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (bulletCounter.bulletCount <= 0)
+        {
+            return;
+        }
+
         Debug.DrawRay(this.transform.position, this.transform.forward);
         if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(0))
         {
@@ -53,6 +64,7 @@ public class ShootingBehaviour : MonoBehaviour
             //only take action if we are not in the anmimation state
             if (fireAnimation.IsPlaying("Fire") == false)
             {
+                source.Play();
                 fireAnimation.Play("Fire");
                 bulletCounter.SubtractBullet();
                 RaycastHit hitInfo;
@@ -73,7 +85,7 @@ public class ShootingBehaviour : MonoBehaviour
                         }
                     }
                     //put us slightly offset from object to avoid Z fighting
-                    GameObject decal = Instantiate(bulletHoleDecal, new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z - 0.1f), Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal));
+                    GameObject decal = Instantiate(bulletHoleDecal, new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z - 0.01f), Quaternion.FromToRotation(-Vector3.forward, hitInfo.normal));
                     Vector3 decalScale = decal.transform.localScale;
                     decal.transform.parent = hitInfo.transform;
                     //did we scale larger than desired when attaching to parent

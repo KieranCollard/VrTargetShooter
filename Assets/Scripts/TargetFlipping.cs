@@ -28,12 +28,18 @@ public class TargetFlipping : MonoBehaviour {
     Quaternion standingQuaternion;
     Quaternion layingQuaternion;
 
-
+    AudioSource audioSource;
     float timer = 0;
    private void Awake()
     {
         standingQuaternion = Quaternion.Euler(standingRotation);
         layingQuaternion = Quaternion.Euler(lyingDownRotation);
+
+        audioSource = this.GetComponent<AudioSource>();
+        if(audioSource == null)
+        {
+            Debug.LogError("The target flipping script did not find an audio source component");
+        }
     }
 
     public void Standup()
@@ -47,6 +53,10 @@ public class TargetFlipping : MonoBehaviour {
             startLerpTime = Time.time;
 
             timer = Random.Range(minTime, maxTime);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
     }
 
@@ -60,6 +70,10 @@ public class TargetFlipping : MonoBehaviour {
 
             startLerpTime = Time.time;
             timer = 0;
+            if (audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
     }
 
@@ -68,7 +82,6 @@ public class TargetFlipping : MonoBehaviour {
         if (isLayingDown == false && isTransitioningToLay == false && isTransitioningToStand == false)
         {
             LayDown();
-            ///TODO score system
         }
     }
 

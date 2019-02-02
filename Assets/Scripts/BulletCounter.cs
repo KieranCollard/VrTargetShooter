@@ -9,6 +9,13 @@ public class BulletCounter : MonoBehaviour {
 
     public uint startingBulletCount = 17; //baseline with out an extension
     uint currentBulletCount = 0;
+    public uint bulletCount
+    {
+        get {
+            return currentBulletCount;
+        }
+        private set { }
+    }
     public Transform ammoCounter;
     BulletCountUI uiDisplay;
 
@@ -59,8 +66,14 @@ public class BulletCounter : MonoBehaviour {
             if (currentBulletCount <= 0)
             {
                 scoreManagerScript.SaveHighScore();
-                gameStateManager.GetComponent<GameStateManager>().LoadEndGameScene();
+                StartCoroutine(loadEndScene());
             }
         }
+    }
+
+    IEnumerator loadEndScene()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        gameStateManager.GetComponent<GameStateManager>().LoadEndGameScene();
     }
 }

@@ -28,11 +28,8 @@ public class ScoreManager : MonoBehaviour {
     {
         int scoreAsInt = System.Convert.ToInt32(score);
         int highestScore = PlayerPrefs.GetInt(scoreKey);
-        Debug.Log(scoreAsInt);
-        Debug.Break();
         if (scoreAsInt > highestScore)
-        {
-            
+        {         
             PlayerPrefs.SetInt(scoreKey, scoreAsInt);
         }
         PlayerPrefs.SetInt(earnedScore, scoreAsInt);
