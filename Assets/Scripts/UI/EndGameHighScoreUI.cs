@@ -9,7 +9,6 @@ public class EndGameHighScoreUI : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log(PlayerPrefs.GetInt(scoreKey));
         this.GetComponent<Text>().text = prefixText + System.Convert.ToString(PlayerPrefs.GetInt(scoreKey));
 	}
 	
